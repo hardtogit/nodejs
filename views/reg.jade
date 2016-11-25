@@ -1,0 +1,26 @@
+
+
+extends layout
+block content
+  form#login.form-horizontal 
+    div.form-group
+      label(for='name').control-label.col-sm-3 账号：
+      div.col-sm-9 
+        input(name='name',type='text').form-control#username
+      div.col-sm-9.col-sm-offset-3.text-danger#check-text  
+    div.form-group
+      label(for='name').control-label.col-sm-3 密码：
+      div.col-sm-9
+        input(name='password',type='password').form-control#password
+    div.form-group
+      label(for='name').control-label.col-sm-3 重复密码：
+      div.col-sm-9
+        input(name='password',type='password').form-control#rppassword        
+    div.form-group
+      div.text-right.col-sm-12
+     
+    div.col-sm-9.col-sm-offset-3
+      buttom.btn.btn-default.btn-sm.pull-left#reg 注册
+      
+  script  
+    include ../public/javascripts/app/reg-page.js

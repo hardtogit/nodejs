@@ -1,0 +1,30 @@
+
+extends layout
+block content
+  header
+    nav.nav.nav-bar
+      ul
+  form#login.form-horizontal 
+    div.form-group
+      label(for='name').control-label.col-sm-3 账号：
+      div.col-sm-9 
+        input(name='name',type='text').form-control#name
+      div.col-sm-9.col-sm-offset-3.text-danger#check-text  
+    div.form-group
+      label(for='name').control-label.col-sm-3 密码：
+      div.col-sm-9
+        input(name='password',type='password').form-control#name
+    div.form-group
+      div.text-right.col-sm-12
+        div.checkbox
+          label
+            input(type='checkbox',id='remenber')
+            span 记住我
+    div.col-sm-9.col-sm-offset-3
+      buttom.btn.btn-default.btn-sm.pull-left 注册
+      buttom.btn.btn-info.btn-sm.pull-right 登陆
+  script  
+    include ../public/javascripts/app/login-page.js
+
+
+ 
