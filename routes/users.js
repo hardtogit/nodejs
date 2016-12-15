@@ -7,7 +7,7 @@ router.get('/reg', function(req, res, next) {
 });
 
 router.get('/test',function(req,res){
-	res.send('caonima')
+	res.send('caa')
 })
 
 module.exports = router;

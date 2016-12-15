@@ -2,19 +2,33 @@
 var express = require('express');
 var router = express.Router();
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.sendfile('views/index.html');
+router.get("/index", function(req, res, next) {
+  res.sendfile('views/public/index.html');
 });
 
-router.get('/reg', function(req, res, next) {
-  res.render('reg', { title: 'reg' });
+/* GET work page. */
+router.get('/features', function(req, res, next) {
+  res.sendfile('views/public/features.html');
 });
-// router.get('/users/test',function(req,res){
-//   res.send('dsadas')
-// })
-// /* GET reg page */
-// router.get('/reg', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+/* GET case page. */
+router.get('/case', function(req, res, next) {
+  res.sendfile('views/public/case.html');
+});
+/* GET join page. */
+router.get('/join', function(req, res, next) {
+  res.sendfile('views/public/join-list.html');
+});
+/* GET job-detail page. */
+router.get('/join/detail', function(req, res, next) {
+  res.sendfile('views/public/join-detail.html');
+});
+
+/*admin Modules*/
+
+/*get login-page*/
+router.get('/login', function(req, res, next) {
+  res.sendfile('views/admin/login.html');
+});
+
 module.exports = router;
 

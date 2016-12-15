@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var userapi=require('./routes/userapi');
+var workapi=require('./routes/workapi');
+
 // var userapi=require('./routes/userapi');
 
 var app = express();
@@ -27,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/api/user',userapi);
-
+app.use('/api/work',workapi);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -58,7 +60,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
+//register module
+require('./models/User')
 
 module.exports = app;
 
