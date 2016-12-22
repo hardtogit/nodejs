@@ -1,9 +1,16 @@
 //这个文件主要用来做路径跳转的定义
 var express = require('express');
 var router = express.Router();
+/* Validate state of login */
+
 /* GET home page. */
 router.get("/index", function(req, res, next) {
-  res.sendfile('views/public/index.html');
+  if(req.session.sign){
+    res.sendfile('views/public/index.html');
+  }
+  else {
+    res.redirect('/login');
+  }
 });
 
 /* GET work page. */
@@ -29,6 +36,13 @@ router.get('/join/detail', function(req, res, next) {
 router.get('/login', function(req, res, next) {
   res.sendfile('views/admin/login.html');
 });
-
+/*get user-form-page*/
+router.get('/admin/user/form', function(req, res, next) {
+  res.sendfile('views/admin/user-form.html');
+});
+/*get user-manage-page*/
+router.get('/admin/user/manage', function(req, res, next) {
+  res.sendfile('views/admin/user-manage.html');
+});
 module.exports = router;
 

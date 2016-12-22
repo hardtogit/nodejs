@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -23,7 +24,15 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//apply cookie and session
 app.use(cookieParser());
+app.use(session({
+  resave: false, // don't save session if unmodified
+  saveUninitialized: true, // don't create session until something stored
+  secret: 'love',
+  cookie:{maxAge:1000*60*5},//set end time
+  rolling:true  //update time if use session
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -38,6 +47,13 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+app.use(function(req,res,next){
+
+  req.session._garbage = Date();
+  req.session.touch();
+  next();
+});
+
 
 // development error handler
 // will print stacktrace

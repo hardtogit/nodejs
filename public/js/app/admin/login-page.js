@@ -15,7 +15,9 @@
             postData.username=$('#username').val();
             postData.password=hex_sha1($('#password').val())//使用sha1加密
             $.post('/api/user/login',postData,function(data){
-                console.log(data)
+                if(data.status){
+                    location.href='/index'
+                }
             })
          });
 

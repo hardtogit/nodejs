@@ -62,7 +62,21 @@ router.post('/login',function(req,res){
     var sql = SqlString.format('SELECT * FROM t_user WHERE login_name =? and password=?',[username,hash]);
     console.log(sql)
     sqlTool.execution(sql,function(data){
-        res.send(data)
+        if(data.err){
+            console.log(data.err);
+            res.send(data.err);
+        }
+        else{
+            if(data.data.length!=0){
+                console.log(req.session)
+                req.session.sign = true;
+                req.session.name = username;
+                res.send({
+                    status:true
+                });
+            }
+        }
+
     });
 });
 module.exports = router;
