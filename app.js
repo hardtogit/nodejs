@@ -5,6 +5,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var ueditor = require("ueditor");
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -23,7 +24,7 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 //apply cookie and session
 app.use(cookieParser());
 app.use(session({
@@ -34,7 +35,36 @@ app.use(session({
   rolling:true  //update time if use session
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+//admin  control
+app.use('/admin',function(req,res,next){
+  if(req.session.sign){
+    next();
+  }
+  else {
+    res.redirect('/login');
+  }
+});
+//ueditor deal
+app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res, next) {
+// ueditor 客户发起上传图片请求
+  if(req.query.action === 'uploadimage'){
+    var foo = req.ueditor;
+    var date = new Date();
+    var imgname = req.ueditor.filename;
 
+    var img_url = '/img/ueditor/';
+    res.ue_up(img_url); //你只要输入要保存的地址 。保存操作交给ueditor来做
+  }
+//  客户端发起图片列表请求
+  else if (req.query.action === 'listimage'){
+    var dir_url = '/img/ueditor/';
+    res.ue_list(dir_url);  // 客户端会列出 dir_url 目录下的所有图片
+  }
+// 客户端发起其它请求
+  else {
+    res.setHeader('Content-Type', 'application/json');
+    res.redirect('/js/lib/ueditor/php/config.json')
+  }}));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/api/user',userapi);
@@ -46,13 +76,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
-app.use(function(req,res,next){
 
-  req.session._garbage = Date();
-  req.session.touch();
-  next();
-});
 
 
 // development error handler

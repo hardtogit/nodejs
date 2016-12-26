@@ -5,12 +5,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/index", function(req, res, next) {
-  if(req.session.sign){
     res.sendfile('views/public/index.html');
-  }
-  else {
-    res.redirect('/login');
-  }
 });
 
 /* GET work page. */
@@ -43,6 +38,14 @@ router.get('/admin/user/form', function(req, res, next) {
 /*get user-manage-page*/
 router.get('/admin/user/manage', function(req, res, next) {
   res.sendfile('views/admin/user-manage.html');
+});
+/*get post-form-page*/
+router.get('/admin/post/form', function(req, res, next) {
+  res.sendfile('views/admin/post-form.html');
+});
+/*get post-manage-page*/
+router.get('/admin/post/manage', function(req, res, next) {
+  res.sendfile('views/admin/post-manage.html');
 });
 module.exports = router;
 

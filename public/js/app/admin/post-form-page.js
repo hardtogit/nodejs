@@ -1,10 +1,10 @@
 $(function(){
-	  var URL = window.UEDITOR_HOME_URL ="js/lib/ueditor/";
+	  var URL = window.UEDITOR_HOME_URL ="/js/lib/ueditor/";
     window.UEDITOR_CONFIG = {
 
         //为编辑器实例添加一个路径，这个不能被注释
         UEDITOR_HOME_URL: URL
-        , serverUrl:URL + "jsp/controller.jsp"
+        , serverUrl:"/ueditor/ue"
         , toolbars: [
             ['fullscreen', 'source', '|',
                 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'blockquote', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'cleardoc', '|',
@@ -16,6 +16,7 @@ $(function(){
                 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
                 'preview', 'drafts']
         ]
+        ,langPath:URL +"lang/"
         ,zIndex : 999
         ,elementPathEnabled : false
         ,maximumWords:8000
@@ -27,15 +28,7 @@ $(function(){
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 })
 
