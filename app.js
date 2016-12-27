@@ -6,16 +6,12 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var ueditor = require("ueditor");
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var userapi=require('./routes/userapi');
-var workapi=require('./routes/workapi');
-
-// var userapi=require('./routes/userapi');
-
+var userApi=require('./routes/userApi');
+var workApi=require('./routes/workApi');
+var postApi=require('./routes/postApi');
 var app = express();
-
 // view engine setupb
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -67,17 +63,15 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res
   }}));
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api/user',userapi);
-app.use('/api/work',workapi);
+app.use('/api/user',userApi);
+app.use('/api/work',workApi);
+app.use('/api/post',postApi);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
-
-
 
 // development error handler
 // will print stacktrace
@@ -101,7 +95,7 @@ app.use(function(err, req, res, next) {
   });
 });
 //register module
-require('./models/User')
+require('./models/sqlTool')
 
 module.exports = app;
 

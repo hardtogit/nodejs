@@ -7,7 +7,7 @@
  for  about user api
  */
 var express = require('express');
-var sqlTool=require('../models/User');
+var sqlTool=require('../models/sqlTool');
 var SqlString = require('sqlstring');
 var router = express.Router();
 router.get('/list',function(req,res,next){

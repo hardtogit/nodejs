@@ -4,7 +4,7 @@ date  2016 8 11
 for  about user api
  */
 var express = require('express');
-var sqlTool=require('../models/User');
+var sqlTool=require('../models/sqlTool');
 var SqlString = require('sqlstring');
 const crypto = require('crypto');//加密模块
 var router = express.Router();
