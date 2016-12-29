@@ -1,5 +1,5 @@
 /**
- * Created by Shinelon on 2016/12/27.
+ * Created by XR on 2016/12/27.
  */
 var express = require('express');
 var sqlTool=require('../models/sqlTool');
@@ -20,18 +20,24 @@ var router = express.Router();
   post.content=data.editorValue;
   post.post_time=new Date();
   post.post_man=req.session.name;
+  post.count=0;
   console.log(post);
-  var sql = SqlString.format('INSERT INTO t_post SET ?', post);
+  if (data.postId){//判断是更新操作还是新增操作
+   var sql = SqlString.format('UPDATE t_post SET img_url = ?, title = ?, flag = ?, type = ? , content = ? ,update_time = ?  WHERE id = ?', [post.img_url, post.title, post.flag, post.type,post.content,new Date(),data.postId]);
+  }
+  else {
+   var sql = SqlString.format('INSERT INTO t_post SET ?', post);
+  }
   sqlTool.execution(sql,function(data){
    if(data.err){
     console.log(data.err);
     res.send(data.err)
    }
    else {
-    res.send(data.data)
+    res.send({status:true})
    }
   });
- });
+  });
 //post list
   router.post('/list',function(req,res,next){
    var data=req.body;
@@ -84,7 +90,7 @@ router.post('/detail',function(req,res,next) {
   }
  })
 });
-//post detail
+//post delete
 router.post('/delete',function(req,res,next) {
  var data = req.body;
  var sql = SqlString.format('DELETE  FROM t_post WHERE id =? ',[data.id]);

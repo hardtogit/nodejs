@@ -1,7 +1,6 @@
 $(function(){
 	  var URL = window.UEDITOR_HOME_URL ="/js/lib/ueditor/";
     window.UEDITOR_CONFIG = {
-
         //为编辑器实例添加一个路径，这个不能被注释
         UEDITOR_HOME_URL: URL
         , serverUrl:"/ueditor/ue"
@@ -24,6 +23,41 @@ $(function(){
     };
     var ue = UE.getEditor('editor');
 	//百度编辑器配置结束
+
+    //获取所传参数ID
+    var GetQueryString=function (name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r!=null) return (r[2]); return null;
+    };
+    var id=GetQueryString('id');
+    //表单回显
+    if(id){
+        $('#page-title').html("修改新闻")
+        $.post('/api/post/detail',{id:id},function(data){
+            $('#postId').val(data[0].id);
+            $('#postTitle').val(data[0].title);
+            $('#editor').html(data[0].content);
+            $.each($('#type option'),function(i,value){
+                if($(value).val()==data[0].type){
+                    value.selected=true;
+                }
+            });
+            $.each($('#flag input'),function(i, value){
+                if($(value).val()==data[0].flag){
+                    value.checked=true;
+                }
+            })
+        });
+    }
+    //单选样式
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // optional
+    });
+
+    //表单验证
     $('#post-form').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -64,6 +98,14 @@ $(function(){
             return;
         }
         var edContent = ue.getContent();
+        if($('#postTitle').val().trim().length==0){
+            layer.msg('你还没填写标题呢');
+            return;
+        }
+        if($('#postTitle').val().trim().length<6||$('#postTitle').val().trim().length>30){
+            layer.msg('标题字数为6~30个字');
+            return;
+        }
         if(edContent.length == 0){
             layer.msg('写点什么吧');
             return;
@@ -71,17 +113,22 @@ $(function(){
         $("#postContent").val(edContent);
         var postData = $form.serialize();
         $.post('/api/post/save',postData,function(data){
-            console.log(data)
-
+           if(data.status){
+                   layer.confirm('保存成功，去往新闻列表页，还是继续添加新闻？', {
+                       btn: ['去往列表页','继续添加新闻'], //按钮
+                       shade: false //不显示遮罩
+                   }, function(){
+                     location.href='/admin/post/manage'
+                   }, function(){
+                       location.href='/admin/post/form'
+                   });
+           }
+            else {
+               layer.msg('保存失败')
+           }
         })
     })
-	
-	
-	
-	
-
-	
-})
+});
 
 
 

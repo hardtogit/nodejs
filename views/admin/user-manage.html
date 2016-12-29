@@ -5,17 +5,15 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="../../css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
-		<link rel="stylesheet" href="css/bootstrap-select.min.css" />
 		<link rel="stylesheet" href="../../css/admin.css" />
 		<link rel="stylesheet" href="../../css/font-awesome.min.css" />
-		<link rel="stylesheet" href="css/jstree/style.min.css" />
-		<script src="../../js/jquery-1.9.1.min.js"></script>
-		<script src="js/lib/jstree.min.js"></script>
-		<script src="../../js/bootstrap.min.js"></script>
-		<!--<script src="../../js/app/admin/menu.js"></script>-->
-		<!--<script src="../../js/app/admin/user-form-page.js"></script>-->
-		<script src="../../js/app/admin/public-page.js"></script>
+		<link rel="stylesheet" href="/js/lib/jquery-layer/skin/layer.css">
+		<script src="/js/jquery-1.9.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/app/admin/public-page.js"></script>
+		<script src="/js/lib/template.js"></script>
+		<script src="/js/app/admin/user-manage-page.js"></script>
+		<script src="/js/lib/jquery-layer/layer.min.js"></script>
 	</head>
 	<body style="background-color: #f6f6f6;font-family: '微软雅黑';">			
 		<div id="header"></div>
@@ -24,76 +22,69 @@
 		<h2 style="font-size: 23px;font-weight: 400;padding: 9px 15px 4px 0;line-height: 29px;margin-top: 0;font-family: '微软雅黑';">用户管理</h2>
 <form class="form-inline well" role="form" id="search-form" style="padding: 6px 10px 2px 10px;">
 	<input type="hidden" name="s" value="20">
-	<div class="form-group">
-		<label for="delFlag">状态 :</label>
-		<select class="form-control input-sm selectpicker" data-width="100px" data-style="btn-sm" data-size=10 id="delFlag" name="delFlag" >
-			<option value="">全部</option>
+	<div class="form-group" style="padding-bottom: 0">
+		<label for="role">角色 :</label>
+		<select class="form-control input-sm selectpicker" data-width="100px" data-style="btn-sm" data-size=10 id="role" name="role" >
+			<option value="">请选择</option>
+			<option value="0">用户</option>
+			<option value="1">管理员</option>
 		</select>
 	</div>
-	<div class="form-group">
-		<select  class="span2 form-control"><option>一级部门</option></select>
-	</div>
-	<div class="form-group">
-		<select class="span2 form-control "><option>二级部门</option></select>
-	</div>
-
-	<div class="form-group">
-		<select  class="span2 form-control"><option>三级部门</option></select>
-	</div>
-
-	<div class="form-group">
+	<div class="form-group" style="padding-bottom: 0">
 		<label for="loginName">登录名:</label>
 		<input class="form-control input-sm" id="loginName" name="loginName" size="30" type="text">
 	</div>
-	<div class="form-group">
+	<div class="form-group" style="padding-bottom: 0">
 		<label for="email">邮件地址:</label>
 		<input class="form-control input-sm" id="email" name="email" size="30" type="text">
 	</div>
-		<div class="form-group">
+		<div class="form-group" style="padding-bottom: 0">
 		<label for="phone">电话号码:</label>
 		<input class="form-control input-sm" id="phone" name="phone" size="30" type="text">
 	</div>
 	<button type="button" class="btn btn-primary btn-sm btn-search-submit">搜索</button>
 	<a href="" class="btn btn-default btn-sm">刷新</a>
 </form>
-	<table id="user-table" class="table table-striped table-bordered table-hover">
-		<thead>
-		<tr>
-			<th style="width:3%;"><input type="checkbox" name="post[]" value="24"></th>
-			<th>登录名</th>
-			<th>姓名</th>
-			<th width="12%;">所属部门</th>
-			<th width="12%;">上次登录时间</th>
-			<th width="12%;">手机号</th>			
-			<th width="12%;" name="role">角色</th>
-			<th width="12%;" name="role">状态</th>
-			<th width="15%;">操作</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td><input type="checkbox" name="post[]" value="24"></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		
-			<td>
-	
-			</td>
-			<td></td>
-			<td>
-				<label class="label label-info">正常</label>
-			</td>
-			<td>
-				<a class="btn-link" href=""><span class="glyphicon glyphicon-edit"></span>编辑</a>
-				<a type="button" class="btn-link user-del" ><span class="glyphicon glyphicon-trash"></span>删除</a>
-				
-			</td>
-		</tr>
-		</tbody>
-	</table>
-
+			<div id="list-data"></div>
+			<script id="list-template" type="text/html">
+				<table id="user-table" class="table table-striped table-bordered table-hover">
+					<thead>
+					<tr>
+						<th style="width:3%;"><input type="checkbox" name="post[]" value="24"></th>
+						<th>登录名</th>
+						<th width="100">姓名</th>
+						<th width="12%;">所属部门</th>
+						<th width="12%;">上次登录时间</th>
+						<th width="12%;">手机号</th>
+						<th width="12%">邮箱</th>
+						<th width="100" name="role">角色</th>
+						<th width="100" name="role">状态</th>
+						<th width="15%;">操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					{{each result as value i}}
+					<tr>
+						<td><input type="checkbox" name="post[]" value="24"></td>
+						<td>{{value.login_name}}</td>
+						<td>{{value.name}}</td>
+						<td></td>
+						<td></td>
+						<td>{{value.phone}}</td>
+						<td>{{value.email}}</td>
+						<td>{{value.role}}</td>
+						<td>
+							<label class="label label-info">{{value.flag}}</label>
+						</td>
+						<td>
+							<a class="btn-link"  href="/admin/user/form?id={{value.id}}"><span class="glyphicon glyphicon-edit"></span>编辑</a>
+							<a type="button" class="btn-link user-del"  data="{{value.id}}"><span class="glyphicon glyphicon-trash"></span>删除</a>
+						</td>
+					</tr>
+					{{/each}}
+					</tbody>
+				</table>
+</script>
 </div>
 	</body>
 

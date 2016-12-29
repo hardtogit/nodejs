@@ -47,5 +47,10 @@ router.get('/admin/post/form', function(req, res, next) {
 router.get('/admin/post/manage', function(req, res, next) {
   res.sendfile('views/admin/post-manage.html');
 });
+/*get material-form-page*/
+router.get('/admin/material/form', function(req, res, next) {
+  res.sendfile('views/admin/material-form.html');
+});
+
 module.exports = router;
 

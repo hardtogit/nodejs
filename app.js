@@ -11,6 +11,8 @@ var users = require('./routes/users');
 var userApi=require('./routes/userApi');
 var workApi=require('./routes/workApi');
 var postApi=require('./routes/postApi');
+var officeApi=require('./routes/officeApi');
+var materialApi=require('./routes/materialApi')
 var app = express();
 // view engine setupb
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +22,7 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
+//app.use(express.bodyParser({ uploadDir: "/upload" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 //apply cookie and session
 app.use(cookieParser());
@@ -66,6 +69,8 @@ app.use('/users', users);
 app.use('/api/user',userApi);
 app.use('/api/work',workApi);
 app.use('/api/post',postApi);
+app.use('/api/office',officeApi);
+app.use('/api/material',materialApi);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
