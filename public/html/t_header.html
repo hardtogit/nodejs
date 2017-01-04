@@ -13,13 +13,18 @@
       	<li class="dropdown" style="margin: 0 8px;">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img class="img-rounded" width="32" src="../../img/avatar.png" />
-                  <shiro:principal property="name" />张伟<b class="caret"></b>
+                  张伟<b class="caret"></b>
               </a>
               <ul class="dropdown-menu" >
                 <li><a href=""><i class="icon-book"></i>帮助</a></li>
-                <li><a href="" title="退出"><i class="icon-key"></i>退出</a></li>
+                <li id="exit"><a href="" title="退出"><i class="icon-key"></i>退出</a></li>
               </ul>
          </li>
       </ul>
     </div><!--/.nav-collapse -->
 </div>
+        <script type="text/javascript">
+            $('#exit').on('click',function(){
+                $.get('/api/user/logout',function(){})
+            })
+        </script>

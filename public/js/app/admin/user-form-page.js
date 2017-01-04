@@ -14,7 +14,7 @@ $(function(){
 	var id=GetQueryString('id');
 	//表单回显
 	if(id){
-		$('#user-title').html("修改用户")
+		$('#user-title').html("修改用户");
 		$.post('/api/user/detail',{id:id},function(data){
 			$('#userId').val(data[0].id);
 			$('#loginName').val(data[0].login_name);
@@ -34,10 +34,6 @@ $(function(){
 			})
 		});
 	}
-
-
-
-
 	//表单验证
 	$('#user-form').bootstrapValidator({
 		message: 'This value is not valid',
@@ -68,7 +64,7 @@ $(function(){
 				validators: {
 					notEmpty: {
 						message: '姓名必须填写！'
-					},
+					}
 				}
 			},
 			password: {

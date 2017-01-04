@@ -42,40 +42,65 @@ var router = express.Router();
   router.post('/list',function(req,res,next){
    var data=req.body;
    var condition=false;
-   var sql="select * from t_post";
+   var pageSize=req.query.size;
+   var pageNo=req.query.page;
+   var param1= (pageNo - 1) * pageSize;
+   var param2=pageSize*pageNo;
+   var sqlCount="select count(*) AS count from t_post";
+   var sql="select * from t_post ";
    //var param={}
    if(data.title){
-      sql+=" where title like "+"'%"+data.title+"%'";
+      sqlCount+=" where title like "+"'%"+data.title+"%'"+"";
+      sql+=" where title like "+"'%"+data.title+"%'"+"";
       condition=true;
    }
    if(data.flag){
     if(condition){
-     sql+=" and flag="+data.flag;
+     sqlCount+="and flag="+data.flag;
+     sql+="and flag="+data.flag;
     }
     else {
+     sqlCount+=" where flag="+data.flag;
      sql+=" where flag="+data.flag;
      condition=true;
     }
    }
    if(data.type){
     if(condition){
+     sqlCount+=" and type="+data.type;
      sql+=" and type="+data.type;
     }
     else {
+     sqlCount+=" where type="+data.type;
      sql+=" where type="+data.type;
      condition=true;
     }
    }
-   sqlTool.execution(sql,function(result){
+   sql+=" order by  id  limit "+param1+","+param2;
+   console.log(sqlCount);
+   console.log(sql);
+   sqlTool.execution(sqlCount,function(result){
     if(result.err){
-     console.log(result.err);
-     res.send(result.err)
+     console.log(result.err)
     }
     else {
-     res.send(result.data)
+     var totalPage=Math.ceil(result.data[0].count/pageSize);
+     sqlTool.execution(sql,function(inResult){
+      if(inResult.err){
+       console.log(inResult.err);
+       res.send(inResult.err)
+      }
+      else {
+       var pageData={};
+       pageData.totalPage=totalPage;
+       pageData.pageNo=pageNo;
+       pageData.pageSize=pageSize;
+       pageData.data=inResult.data;
+       res.send(pageData)
+      }
+     });
     }
    });
-   console.log(sql)
   });
 //post detail
 router.post('/detail',function(req,res,next) {

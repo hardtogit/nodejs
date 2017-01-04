@@ -35,14 +35,14 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 //admin  control
-app.use('/admin',function(req,res,next){
-  if(req.session.sign){
-    next();
-  }
-  else {
-    res.redirect('/login');
-  }
-});
+//app.use('/admin',function(req,res,next){
+//  if(req.session.sign){
+//    next();
+//  }
+//  else {
+//    res.redirect('/login');
+//  }
+//});
 //ueditor deal
 app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res, next) {
 // ueditor 客户发起上传图片请求

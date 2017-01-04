@@ -41,6 +41,7 @@ $(function(){
             $.each($('#type option'),function(i,value){
                 if($(value).val()==data[0].type){
                     value.selected=true;
+
                 }
             });
             $.each($('#flag input'),function(i, value){

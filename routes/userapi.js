@@ -153,4 +153,9 @@ router.post('/login',function(req,res){
         }
     });
 });
+router.get('/logout',function(req,res){
+    req.session.sign=false;
+    req.session.name = '';
+    res.redirect('/login');
+});
 module.exports = router;

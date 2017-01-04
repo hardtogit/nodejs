@@ -1,13 +1,17 @@
+/**
+ * Created by XR on 2017/1/4.
+ * Time: 16:06
+ */
 /* ajax 请求更新数据 */
 function sendAjax(page,size,callBack,formData){
-    $.post('/api/post/list?page='+page+'&size='+size,formData,function(data){
+    $.post('/api/material/list?page='+page+'&size='+size,formData,function(data){
         var  result={result:data.data};
         var html=template('list-template',result);
         $('#list-data').empty().append(html);
 
-            if(callBack){
-                return  callBack(data.totalPage);
-            }
+        if(callBack){
+            return  callBack(data.totalPage);
+        }
     })
 }
 $(function(){
@@ -22,7 +26,7 @@ $(function(){
         },searchData);
     });
     /*删除数据*/
-    $('#list-data').on('click','.post-del',function(){
+    $('#list-data').on('click','.material-del',function(){
         var $this=$(this);
         var id=$this.attr('data');
         layer.confirm('要删除该记录？', {
@@ -31,7 +35,7 @@ $(function(){
         }, function(){
             var posting = $.post("/api/post/delete", {id:id},function(data){
                 if(data.status){
-                      layer.msg('删除成功', {icon:9});
+                    layer.msg('删除成功', {icon:9});
                     $this.parents("tr").remove();
                 }
                 else {

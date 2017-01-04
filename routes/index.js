@@ -51,6 +51,9 @@ router.get('/admin/post/manage', function(req, res, next) {
 router.get('/admin/material/form', function(req, res, next) {
   res.sendfile('views/admin/material-form.html');
 });
-
+/*get material-manage-page*/
+router.get('/admin/material/manage', function(req, res, next) {
+  res.sendfile('views/admin/material-manage.html');
+});
 module.exports = router;
 

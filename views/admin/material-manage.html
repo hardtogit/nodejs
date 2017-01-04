@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/admin.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/js/lib/jquery-layer/skin/layer.css">
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/lib/template.js"></script>
+    <script src="/js/app/admin/material-manage-page.js"></script>
+    <script src="/js/lib/page.js"></script>
+    <script src="/js/app/admin/public-page.js"></script>
+    <script src="/js/lib/jquery-layer/layer.min.js"></script>
+
+</head>
+<body style="background-color: #f6f6f6;font-family: '微软雅黑';">
+<div id="header"></div>
+<div id="side"></div>
+<div style="margin-left: 200px;margin-top: 53px;">
+    <h4 style="font-size: 23px;font-weight: 400;padding: 9px 15px 4px 0;line-height: 29px;margin-top: 0;font-family: '微软雅黑';">新闻管理<a class="btn-link btn-sm" href="/admin/post/form" class="btn-link"><span class="glyphicon glyphicon-edit"></span>添加新闻</a></h4>
+    <form class="form-inline well" role="form" id="search-form" style="padding: 4px">
+
+        <div class="form-group" style="padding-bottom: 0">
+            <label for="title">标题:</label>
+            <input class="form-control input-sm" name="title" id="title" size="30" type="text">
+        </div>
+        <div class="form-group" style="padding-bottom: 0">
+            <label for="type">类型:</label>
+            <select class="span2 form-control " name="type" id="type">
+                <option value="">请选择</option>
+                <option value="0" >类型1</option>
+                <option value="1" >类型1</option>
+                <option value="2" >类型1</option>
+            </select>
+        </div>
+        <div class="form-group" style="padding-bottom: 0">
+            <label for="flag">是否有效:</label>
+            <select class="span2 form-control " name="flag" id="flag">
+                <option value="">请选择</option>
+                <option value="0">是</option>
+                <option value="1">否</option>
+            </select>
+        </div>
+        <button id="search-submit" type="button" class="btn btn-primary btn-sm btn-search-submit">确认</button>
+        <a id="refresh" href="/admin/post/manage" class="btn btn-default btn-sm">刷新</a>
+    </form>
+    <div id="list-data"></div>
+
+    <script id="list-template" type="text/html">
+        <table id="dict-table" class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th style="width:3%;"><input type="checkbox" name="post[]" value="24"></th>
+                <th style="width:3%;">素材图</th>
+                <th style="width: 18%">标题</th>
+                <th style="width: 10%">链接</th>
+                <th style="width: 10%">类型</th>
+                <th style="width: 10%">状态</th>
+                <th width="15%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {{each result as value i}}
+            <tr>
+                <td><input type="checkbox" name="post[]" value="24"></td>
+                <td><img width="42" height="36" src="{{value.img_url}}" alt=""> </td>
+                <td >
+                    {{value.title}}
+                </td>
+                <td>
+                    {{value.link_url}}
+
+                </td>
+                <td>
+                    {{value.type}}
+                </td>
+                <td>{{value.flag}}</td>
+                <td>
+                    <a class="btn-link" href="/admin/material/form?id={{ value.id }}"><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                    <a type="button" class="btn-link material-del" data='{{ value.id }}'><span class="glyphicon glyphicon-trash"></span>删除</a>
+                </td>
+            </tr>
+
+            {{/each}}
+
+
+            </tbody>
+        </table>
+    </script>
+    <div class="ui-page pull-right" id="ui-page">
+    </div>
+</div>
+
+
+</body>
+
+</html>
