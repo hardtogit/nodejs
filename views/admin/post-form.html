@@ -16,6 +16,62 @@
 		<script src="/js/app/admin/public-page.js"></script>
 		<script src="/js/lib/jquery-layer/layer.min.js"></script>
 		<script src="/js/lib/jquery-icheck/icheck.min.js"></script>
+		<style>
+			.fileUpload {
+				position: relative;
+				overflow: hidden;
+				top:0;
+				left:6px;
+
+			}
+			.up-img{
+				position: relative;
+				overflow: hidden;
+			}
+			.up-img input.upload{
+				position: absolute;
+				top: 0;
+				right: 0;
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				cursor: pointer;
+				opacity: 0;
+				filter: alpha(opacity=0);
+			}
+			#img-content{
+				width: 100px;
+				height: 100px;
+				float: left;
+			}
+			#img-content img{
+				width: 100%;
+				height:100%;
+				cursor:pointer
+			}
+			.fileUpload input.upload {
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				cursor: pointer;
+				opacity: 0;
+				filter: alpha(opacity=0);
+			}
+
+			.position-block{
+				padding-left: 106px;
+				line-height: 1.4;
+			}
+			.backdrop img{
+				line-height: 100%;
+
+			}
+
+
+		</style>
 
 	</head>
 	<body style="background-color: #f6f6f6;font-family: '微软雅黑';">			
@@ -26,9 +82,32 @@
 				<form id="post-form" class="form-horizontal" role="form" style="padding-left: 10px;">
 					<input type="hidden" id="postId" name="postId">
 			<div class="col-sm-9">
+
 				<div class="form-group">
 					<input type="text" class="form-control required" id="postTitle" name="postTitle" placeholder="在此填写标题" style="font-weight: 500;font-size: 18px; height: 42px;" title="还没有写标题呢~^_^">
+				</div>		<div class="form-group">
+				<div class="panel panel-default" style="margin-bottom: 6px">
+					<div class="panel-heading">
+						<h3 class="panel-title">新闻标题图片</h3>
+					</div>
+					<div class="panel-body">
+						<div class="col-sm-12" style="padding-left: 0">
+							<div class="r-input">
+								<div id='img-content' title="点击可预览图片">
+									<img id="pimg" > </img>
+								</div>
+								<div class="fileUpload">
+									<span id="up-img" class="btn btn-default btn-sm">上传图片</span>
+									<input type="file" name="fileToUpload" id="fileToUpload" class="fileupload upload pup" value="上传图片">
+								</div>
+								<p class="position-block">支持 JPG、PNG、GIF 格式，<br>大小不超过 2M 。</p>
+							</div>
+						</div>
+					</div>
 				</div>
+			</div>
+
+
 				<div class="form-group">
 					<input type="hidden" id="postContent" name="postContent" />
 					<script id="editor" type="text/plain" style="height:500px;width:100%">

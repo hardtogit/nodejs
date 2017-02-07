@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/admin.css" />
+<link rel="stylesheet" href="/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/js/lib/bootstrapValidator/css/bootstrapValidator.min.css" />
+<link rel="stylesheet" href="/js/lib/jquery-icheck/square/blue.css" />
+<link rel="stylesheet" href="/js/lib/jquery-layer/skin/layer.css">
+<link rel="stylesheet" href="/js/lib/bootstrap-select/bootstrap-select.css">
+<script src="/js/jquery-1.9.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/bootstrapValidator/js/bootstrapValidator.min.js"></script>
+<script src="/js/lib/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="/js/app/admin/public-page.js"></script>
+<script src="/js/lib/jquery-layer/layer.min.js"></script>
+<script src="/js/lib/jquery-icheck/icheck.min.js"></script>
+<script src="/js/app/admin/job-form-page.js"></script>
+<style>
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        top:0;
+        left:6px;
+
+    }
+    .up-img{
+        position: relative;
+        overflow: hidden;
+    }
+    .up-img input.upload{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    #img-content{
+        width: 100px;
+        height: 100px;
+        float: left;
+    }
+    #img-content img{
+        width: 100%;
+        height:100%;
+        cursor:pointer
+    }
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    .picture-group{
+        padding: 10px;
+    }
+    .help-block{
+        padding-left: 106px;
+        line-height: 1.4;
+    }
+    .backdrop {
+        position: fixed;
+        z-index: 10000;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0,0,0,1);
+        text-align: center;
+        line-height: 100%;
+    }
+    .backdrop img{
+        line-height: 100%;
+
+    }
+
+</style>
+
+</head>
+<body style="background-color: #f6f6f6;font-family: '微软雅黑';">
+<div id="header"></div>
+<div id="side"></div>
+<div style="margin-left: 200px;margin-top: 52px;">
+    <h2 id="page-title" style="font-size: 23px;font-weight: 400;padding: 9px 15px 4px 0;line-height: 29px;margin-top: 0;font-family: '微软雅黑';">新建招聘</h2>
+    <form id="material-form" class="form-horizontal" role="form" style="padding-left: 10px;">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <input type="hidden" id="materialId" name="materialId" value=""/>
+                    <label for="pushUrl" class=" col-sm-2 control-label">招聘岗位：</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control required" id="title" name="title" value=""
+                               placeholder="在此填写招聘职位"  title="还没有写标题呢~^_^">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pushUrl" class=" col-sm-2 control-label">链接：</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control input-sm required" id="link_url" name="link_url" value="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="type" class=" col-sm-2 control-label">类型：</label>
+                    <div class="col-sm-3">
+                        <select class="form-control input-sm selectpicker show-tick" id="type" name="type"   data-live-search="true" title="选择类型....">
+                            <option  >请选择</option>
+                            <option  value="0" >首页Banner</option>
+                            <option value="1">成功案例</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class=" col-sm-2 control-label">状态：</label>
+                    <div class="col-sm-4" id="flag">
+                        <input type="radio" checked   name="flag" value="0"  title="状态"> 启用
+                        <input type="radio"    name="flag" value="1"  title="状态"> 禁用
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class=" col-sm-2 control-label">描述：</label>
+                    <div class="col-sm-8">
+                        <textarea id="description" placeholder="写入素材的描述信息,最多不能超过320个字..." maxlength="320" name="description" class="form-control input-sm required" rows="4" cols="40"></textarea>
+                    </div>
+                </div>
+
+                <div  style="clear: both">
+                    <button id="material-submit" class="btn btn-primary btn-sm" type="button">保 存</button>
+                    <button id="material-cancel" class="btn btn-sm" type="button" onclick="history.go(-1)">返 回</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id='img-preview' class="backdrop " style="display: none;">
+        <img src="" alt="" />
+    </div>
+</div>
+</body>
+
+</html>

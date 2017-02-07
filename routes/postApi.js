@@ -9,11 +9,7 @@ var router = express.Router();
  router.post('/save',function(req,res,next){
   var post={};
   var data=req.body;
-  var starNum=req.body.editorValue.indexOf('src=')+5;
-  var str1=req.body.editorValue.substring(starNum);
-  var endNum=str1.indexOf('title=')-2;
-  var str2=str1.substring(0,endNum);
-  post.img_url=str2;
+  post.img_url=data.img_url;
   post.title=data.postTitle;
   post.flag=data.flag;
   post.type=data.type;
@@ -45,7 +41,7 @@ var router = express.Router();
    var pageSize=req.query.size;
    var pageNo=req.query.page;
    var param1= (pageNo - 1) * pageSize;
-   var param2=pageSize*pageNo;
+   var param2=pageSize;
    var sqlCount="select count(*) AS count from t_post";
    var sql="select * from t_post ";
    //var param={}
@@ -76,7 +72,9 @@ var router = express.Router();
      condition=true;
     }
    }
-   sql+=" order by  id  limit "+param1+","+param2;
+   if(pageSize&&pageNo){
+    sql+=" order by  post_time desc limit "+param1+","+param2;
+   }
    console.log(sqlCount);
    console.log(sql);
    sqlTool.execution(sqlCount,function(result){
@@ -121,7 +119,7 @@ router.post('/delete',function(req,res,next) {
  var sql = SqlString.format('DELETE  FROM t_post WHERE id =? ',[data.id]);
  sqlTool.execution(sql,function(result){
   if(result.err){
-   console.log(result.err)
+   console.log(result.err);
    res.send({status:false,data: result.err});
   }
   else {

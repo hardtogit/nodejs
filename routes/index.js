@@ -24,6 +24,10 @@ router.get('/join', function(req, res, next) {
 router.get('/join/detail', function(req, res, next) {
   res.sendfile('views/public/join-detail.html');
 });
+/*get news-page*/
+router.get('/news', function(req, res, next) {
+  res.sendfile('views/public/news.html');
+});
 
 /*admin Modules*/
 
@@ -55,5 +59,14 @@ router.get('/admin/material/form', function(req, res, next) {
 router.get('/admin/material/manage', function(req, res, next) {
   res.sendfile('views/admin/material-manage.html');
 });
+/*get job-form-page*/
+router.get('/admin/job/form', function(req, res, next) {
+  res.sendfile('views/admin/job-form.html');
+});
+/*get job-manage-page*/
+router.get('/admin/job/manage', function(req, res, next) {
+  res.sendfile('views/admin/job-manage.html');
+});
+
 module.exports = router;
 

@@ -31,7 +31,7 @@ $(function(){
         }, function(){
             var posting = $.post("/api/post/delete", {id:id},function(data){
                 if(data.status){
-                      layer.msg('删除成功', {icon:9});
+                      layer.msg('删除成功', {icon:1});
                     $this.parents("tr").remove();
                 }
                 else {

@@ -24,6 +24,8 @@ $(function(){
     var ue = UE.getEditor('editor');
 	//百度编辑器配置结束
 
+
+
     //获取所传参数ID
     var GetQueryString=function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
@@ -37,6 +39,7 @@ $(function(){
         $.post('/api/post/detail',{id:id},function(data){
             $('#postId').val(data[0].id);
             $('#postTitle').val(data[0].title);
+            $('#pimg').attr('src',data[0].img_url)
             $('#editor').html(data[0].content);
             $.each($('#type option'),function(i,value){
                 if($(value).val()==data[0].type){
@@ -51,6 +54,46 @@ $(function(){
             })
         });
     }
+
+    /*图片上传*/
+    $('.fileupload').change(function(event) {
+        /* Act on the event */
+        var  nowImg='';
+        if( $('#pimg').attr('src')){
+            nowImg=$('#pimg').attr('src');
+        }
+        if ($('.fileupload').val().length) {
+            var fileName = $('.fileupload').val();
+            var extension = fileName.substring(fileName.lastIndexOf('.'), fileName.length).toLowerCase();
+            if (extension == ".jpg" || extension == ".png"|| extension==".jpeg" || extension=='.gif') {
+                var data = new FormData();
+                data.append('nowImg',nowImg);
+                data.append('upload', $('#fileToUpload')[0].files[0]);
+                console.log($('#fileToUpload')[0].files[0])
+                $.ajax({
+                    url: '/api/material/upload/picture',
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+                    contentType: false, //不可缺参数
+                    processData: false, //不可缺参数
+                    success: function(data) {
+                        var  imgurl=data.url.substring(6);
+                        $('#pimg').attr('src',imgurl);
+                        $('#up-img').html('重新上传')
+
+                    },
+                    error: function() {
+                        console.log('error');
+                    }
+                });
+            }
+            else {
+                layer.msg('亲！请选择正确的图片格式哦')
+            }
+        }
+    });
+
     //单选样式
     $('input').iCheck({
         checkboxClass: 'icheckbox_square-blue',
@@ -111,8 +154,13 @@ $(function(){
             layer.msg('写点什么吧');
             return;
         }
+        if(!$('#pimg').attr('src')){
+            layer.msg('你还没有上传标题图片')
+            return;
+        }
         $("#postContent").val(edContent);
-        var postData = $form.serialize();
+        var postData = $form.serializeArray();
+        postData.push({name:'img_url',value:$('#pimg').attr('src')});
         $.post('/api/post/save',postData,function(data){
            if(data.status){
                    layer.confirm('保存成功，去往新闻列表页，还是继续添加新闻？', {

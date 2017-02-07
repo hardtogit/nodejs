@@ -80,7 +80,9 @@ router.post('/save',function(req,res,next){
     if (data.materialId){//判断是更新操作还是新增操作
         var sql = SqlString.format('UPDATE t_material SET title = ?, img_url = ?, link_url = ?, type = ? , flag = ? ,description = ?  WHERE id = ?', [data.title, data.img_url, data.link_url, data.type,data.flag,data.description,data.materialId]);
     }
-    var sql = SqlString.format('INSERT INTO t_material SET ?', material);
+    //else {
+        var sql = SqlString.format('INSERT INTO t_material SET ?', material);
+    //}
     console.log(sql)
     sqlTool.execution(sql,function(data){
         if(data.err){
@@ -98,7 +100,7 @@ router.post('/list',function(req,res,next){
     var pageSize=req.query.size;
     var pageNo=req.query.page;
     var param1= (pageNo - 1) * pageSize;
-    var param2=pageSize*pageNo;
+    var param2=pageSize;
     var sqlCount="select count(*) AS count from t_material";
     var sql="select * from t_material ";
     //var param={}
@@ -129,7 +131,10 @@ router.post('/list',function(req,res,next){
             condition=true;
         }
     }
-    sql+=" order by  id  limit "+param1+","+param2;
+    if(pageSize&&pageNo){
+        sql+=" order by  id  limit "+param1+","+param2;
+    }
+
     console.log(sqlCount);
     console.log(sql);
     sqlTool.execution(sqlCount,function(result){
@@ -165,6 +170,19 @@ router.post('/detail',function(req,res,next) {
         }
         else {
             res.send(result.data)
+        }
+    })
+});
+//material delete
+router.post('/delete',function(req,res,next) {
+    var data = req.body;
+    var sql = SqlString.format('DELETE  FROM t_material WHERE id =? ',[data.id]);
+    sqlTool.execution(sql,function(result){
+        if(result.err){
+            res.send(result.err);
+        }
+        else {
+            res.send({status:true})
         }
     })
 });

@@ -13,8 +13,13 @@ var router = express.Router();
 router.get('/list',function(req,res,next){
     var String='select * from t_recruit';
     sqlTool.execution(String,function(data){
-        console.log(data)
-        res.send(data)
+        if(data.err){
+            console.log(data.err)
+        }
+        else {
+            res.send(data)
+        }
+
     })
 });
 router.post('/detail',function(req,res,next){

@@ -26,9 +26,14 @@ $(function(){
             });
             $.each($('#flag input'),function(i, value){
                 if($(value).val()==data[0].flag){
-                    alert('ds')
-                    value.checked=true;
+                    value.checked='checked';
                 }
+            });
+            //单选样式
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
             });
             $('#description').val(data[0].description)
         });

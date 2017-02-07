@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>mPurpose - Multipurpose Feature Rich Bootstrap Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/icomoon-social.css">
+        <link rel="stylesheet" href="/css/leaflet.css" />
+		<link rel="stylesheet" href="/css/font-awesome.min.css">
+		<!--[if lte IE 8]>
+		<link rel="stylesheet" href="/css/leaflet.ie.css"/>
+		<![endif]-->
+		<link rel="stylesheet" href="/css/main.css">
+        <script src="/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        
+
+        <!-- Navigation & Logo-->
+		<div class="mainmenu-wrapper ">
+			<div class="container">
+				<div class="menuextras">
+					<div class="extras">
+						<ul>
+							<li class="shopping-cart-items"><i class="glyphicon glyphicon-phone-alt icon-white"></i> <b>15528059582</b></li>
+							<li>
+								<i class="fa fa-qq"></i> <b>413401168</b>
+							</li>
+							<!--<li><a href="page-login.html">Login</a></li>-->
+						</ul>
+					</div>
+				</div>
+				<nav id="mainmenu" class="mainmenu">
+					<span class="logo-wrapper"><a href="index.html"><img src="../img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a><span class="fa fa-bars pull-right visible-xs"></span></span>
+					<ul id="nav-ul">
+						<li >
+							<a href="/index">主页</a>
+						</li>
+						<li class="active">
+							<a href="/news">新闻动态</a>
+						</li>
+						<li>
+							<a href="/features">服务于支持</a>
+						</li>
+						<li>
+							<a href="/case">成功案例</a>
+						</li>
+						<li >
+							<a href="/join">加入我们</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+        <!-- Page Title -->
+		<div class="section section-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>新闻动态</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+        
+        <div class="section">
+	    	<div class="container">
+				<div class="row">
+					<!-- Sidebar -->
+					<div class="col-sm-4 blog-sidebar">
+						<h4>搜索新闻</h4>
+						<form id="search-form">
+							<div class="input-group">
+								<input class="form-control input-md" placeholder="搜索标题" id="appendedInputButtons" name="title" type="text">
+								<span class="input-group-btn">
+									<button class="btn btn-md" id="search-submit" type="button">搜索</button>
+								</span>
+							</div>
+						</form>
+						<h4>新闻列表</h4>
+						<div id="news-data"></div>
+						<script id="news-template" type="text/html">
+							<ul class="recent-posts">
+						 {{each result as value i}}
+								<li><a href="javascript:" data="{{value.id}}" class="detail">{{value.title}}</a></li>
+							{{/each}}
+								</ul>
+                        </script>
+						<div class="ui-page pull-right" id="ui-page">
+						</div>
+						<!--<h4>推荐新闻</h4>-->
+						<!--<ul class="blog-categories">-->
+							<!--<li><a href="#">Lorem ipsum</a></li>-->
+							<!--<li><a href="#">Sed sit amet metus</a></li>-->
+							<!--<li><a href="#">Nunc et diam </a></li>-->
+							<!--<li><a href="#">Quisque</a></li>-->
+						<!--</ul>-->
+					</div>
+					<!-- End Sidebar -->
+					<div class="col-sm-8">
+						<div class="blog-post blog-single-post">
+							<script id="detail-template" type="text/html">
+							<div class="single-post-title">
+								<h3>{{title}}</h3>
+							</div>
+							<div class="single-post-info">
+								<i class="glyphicon glyphicon-time"></i>{{post_time}} <a href="#" title="Show Comments"><i class="glyphicon glyphicon-eye-open"></i>11</a>
+							</div>
+							<div class="single-post-image">
+								<img src="{{img_url}}" alt="Post Title">
+								{{#content}}
+							</div>
+							</script>
+								<!-- End Comment Form -->
+							</div>
+							<!-- End Comments -->
+						</div>
+					</div>
+					<!-- End Blog Post -->
+				</div>
+			</div>
+	    </div>
+
+	    <!-- Footer -->
+		<div class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-footer col-md-6 col-xs-12">
+						<h3>联系我们</h3>
+						<p class="contact-us-details">
+							<b>地址:</b>成都市武侯区新南路123号百脑汇4楼 <br/>
+							<b>电话:</b> 15528059582<br/>
+							<b>Email:</b> <a >4113401168@qq.com</a><br/>
+							<b>备案号:</b> 蜀ICP备16003380号
+						</p>
+					</div>
+					<div class="col-footer col-md-6 col-xs-12">
+						<h3>友情链接</h3>
+						<p class="contact-us-details">
+							<b>Github:</b> <a target="_blank" href="https://github.com/">https://github.com/</a><br/>
+							<b>开源中国社区:</b> <a target="_blank" href="http://www.oschina.net/">http://www.oschina.net/</a><br/>
+							<b>Csdn博客:</b> <a target="_blank" href="http://blog.csdn.net/">http://blog.csdn.net</a>
+						</p>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="footer-copyright">Copyright &copy; 成都辰海信息技术有限公司.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <!-- Javascripts -->
+        <script src="/js/jquery-1.9.1.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/leaflet.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/jquery.sequence-min.js"></script>
+        <script src="/js/jquery.bxslider.js"></script>
+        <script src="/js/main-menu.js"></script>
+        <script src="/js/template.js"></script>
+		<script src="/js/lib/template.js"></script>
+		<script src="/js/lib/page.js"></script>
+		<script src="/js/app/public/news-page.js"></script>
+		<script src="/js/app/public/nav.js"></script>
+
+    </body>
+</html>

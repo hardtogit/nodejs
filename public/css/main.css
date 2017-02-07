@@ -106,7 +106,68 @@ a:hover {
 /*--------------------------------------------------------------------------
 +	Services Style
 --------------------------------------------------------------------------*/
+/*page style*/
+#ui-page .page,
+#ui-page .end,
+#ui-page .home {
+  padding: 6px;
+  cursor: pointer;
+}
+#ui-page .page:hover,
+#ui-page .end:hover,
+#ui-page .home:hover,
+#ui-page .page.current,
+#ui-page .end.current,
+#ui-page .home.current {
+  color: #0a6aa1;
+}
 /* Multicolumn */
+.carousel-control {
+  top: 90px;
+}
+.carousel-inner {
+  position: absolute!important;
+  top: 0;
+}
+.index-mainmenu-wrapper {
+  width: 100%;
+  opacity: 0.9;
+  position: relative;
+}
+.index-mainmenu-wrapper .menuextras {
+  color: #666666;
+}
+#news-data .intro {
+  height: 40px;
+  overflow: hidden;
+}
+.mainmenu .logo-wrapper {
+  float: left;
+}
+.mainmenu .logo-wrapper .fa {
+  font-size: 24px;
+  line-height: 38px;
+}
+@media screen and (max-width: 479px) {
+  .index-mainmenu-wrapper {
+    position: relative;
+    width: 100%;
+    opacity: 0.9;
+  }
+  .index-mainmenu-wrapper .menuextras {
+    color: #666666;
+  }
+}
+#carousel-example-generic {
+  height: 490px;
+}
+#carousel-example-generic img {
+  width: 100%;
+}
+.index-list-data {
+  height: 490px;
+  margin-top: -94px;
+}
 .service-wrapper {
   background: #FFF;
   margin: 20px 10px;
@@ -2479,6 +2540,34 @@ span.color-red {
   }
 }
 @media screen and (max-width: 479px) {
+  h2 {
+    font-size: 1.5em;
+  }
+  h2 small {
+    position: relative;
+    top: -4px;
+  }
+  .logo-wrapper img {
+    width: 130px;
+    position: relative;
+    top: -4px;
+  }
+  .section {
+    padding: 15px 0;
+  }
+  #news-data .caption {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 10px 0 0 0 ;
+  }
+  #news-data .col-xs-4 {
+    padding-left: 0 ;
+    padding-right: 10px;
+  }
+  #news-data .col-xs-8 {
+    padding: 0 ;
+  }
   .mainmenu {
     font-size: 120%;
     border: none;
@@ -2498,10 +2587,14 @@ span.color-red {
   }
   .mainmenu > ul > li > a {
     display: block;
-    padding: 1em 3em;
+    padding: 0.6em 3em;
   }
   .mainmenu > ul > li:last-child {
     border: none;
+  }
+  .mainmenu .logo-wrapper {
+    display: block;
+    float: none;
   }
   .mainmenu .mainmenu-submenu {
     position: relative;
@@ -2513,6 +2606,9 @@ span.color-red {
     width: 100%;
     float: none;
     padding: 0;
+  }
+  .blog-single-post {
+    padding: 10px ;
   }
 }
 /*--------------------------------------------------------------------------

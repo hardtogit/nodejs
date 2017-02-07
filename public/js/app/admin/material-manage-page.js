@@ -15,14 +15,14 @@ function sendAjax(page,size,callBack,formData){
     })
 }
 $(function(){
-    sendAjax(1,20,function(totalPage){
-        $("#ui-page").paging({pageSize:1,totalPage:totalPage});
+    sendAjax(1,4,function(totalPage){
+        $("#ui-page").paging({pageSize:4,totalPage:totalPage});
     });
 
     $('#search-submit').on('click',function(){
         var searchData=$('#search-form').serialize();
-        sendAjax(1,20,function(totalPage){
-            $("#ui-page").empty().paging({pageSize:1,totalPage:totalPage});
+        sendAjax(1,5,function(totalPage){
+            $("#ui-page").empty().paging({pageSize:10,totalPage:totalPage});
         },searchData);
     });
     /*删除数据*/
@@ -33,9 +33,9 @@ $(function(){
             btn: ['确认','取消'], //按钮
             shade: false //不显示遮罩
         }, function(){
-            var posting = $.post("/api/post/delete", {id:id},function(data){
+            var posting = $.post("/api/material/delete", {id:id},function(data){
                 if(data.status){
-                    layer.msg('删除成功', {icon:9});
+                    layer.msg('删除成功', {icon:1});
                     $this.parents("tr").remove();
                 }
                 else {

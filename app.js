@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var d = require('domain').create();
 var bodyParser = require('body-parser');
 var ueditor = require("ueditor");
 var routes = require('./routes/index');
@@ -35,14 +36,14 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 //admin  control
-//app.use('/admin',function(req,res,next){
-//  if(req.session.sign){
-//    next();
-//  }
-//  else {
-//    res.redirect('/login');
-//  }
-//});
+app.use('/admin',function(req,res,next){
+  if(req.session.sign){
+    next();
+  }
+  else {
+    res.redirect('/login');
+  }
+});
 //ueditor deal
 app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res, next) {
 // ueditor 客户发起上传图片请求
@@ -99,6 +100,20 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+d.on('error', function(er){
+  // The error won't crash the process, but what it does is worse!
+  // Though we've prevented abrupt process restarting, we are leaking
+  // resources like crazy if this ever happens.
+  // This is no better than process.on('uncaughtException')!
+  console.log('error, but oh well', er.message);
+});
+
+//d.run(function(){
+//  require('http').createServer(function(req, res){
+//    handleRequest(req, res);
+//}).listen(3000);
+//});
 //register module
 require('./models/sqlTool')
 
